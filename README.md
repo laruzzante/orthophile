@@ -1,9 +1,9 @@
-# orthogeny
+# Orthogeny
 
 Snakemake pipeline to build a tree from OrthoDB single-copy orthologues. 
 
 
-# usage:
+# Usage
 
 Install conda or miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/).
 
