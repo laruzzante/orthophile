@@ -1,0 +1,40 @@
+host: 'http://www.orthodb.org/' ## Orthodb website that we will be using for querying
+
+taxonomic_level: '7147' ## taxonomic identifier (NCBI), e.g. ID 7147 for node Diptera
+
+request_limit: '5000' ## A limit for getting results from the queries we will be submitting
+universality: '0.95' ## The percentage of species required to have this gene in order for the query to return a result
+singlecopyness: '0.95' ## The percentage of number of species that have this gene as a single copy
+
+species_list : {
+  '7217_0': 'Drosophila_ananassae',
+  '125945_0': 'Drosophila_biarmipes',
+  '42026_0': 'Drosophila_bipectinata',
+  '30019_0': 'Drosophila_busckii',
+  '30023_0': 'Drosophila_elegans',
+  '7220_0': 'Drosophila_erecta',
+  '29029_0': 'Drosophila_eugracilis',
+  '30025_0': 'Drosophila_ficusphila',
+  '7222_0': 'Drosophila_grimshawi',
+  '7224_0': 'Drosophila_hydei',
+  '7227_0': 'Drosophila_melanogaster',
+  '7230_0': 'Drosophila_mojavensis',
+  '7282_0': 'Drosophila_obscura',
+  '7237_0': 'Drosophila_pseudoobscura',
+  '1041015_0': 'Drosophila_rhopaloa',
+  '7274_0': 'Drosophila_serrata',
+  '29030_0': 'Drosophila_takahashii',
+  '7244_0': 'Drosophila_virilis',
+  '7260_0': 'Drosophila_willistoni',
+  '7245_0': 'Drosophila_yakuba',
+  '7370_0': 'Musca_domestica'
+}
+
+outgroup: 'Musca_domestica'
+raxml_output_name: 'drosophila'
+raxml_cores: '8'
+bootstraps: '100'
+model: 'PROTGAMMAJTT'
+algorithm: 'a'
+rapid_bootstrap_seed: '1234'
+parsimony_seed: '1234'
