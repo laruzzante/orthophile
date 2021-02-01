@@ -9,7 +9,7 @@ Install conda or miniconda (https://docs.conda.io/projects/conda/en/latest/user-
 
 Download the orthogeny git repository.
 
-Open a terminal and move into the <orthogeny> folder:
+Open a terminal and move into the $<$**orthogeny**$>$ folder:
 `cd <your/path/to/orthogeny>`
 
 Create the specific conda environment:
@@ -18,13 +18,12 @@ Create the specific conda environment:
 Activate the conda environment:
 `conda activate orthogeny`
 
-Move into the <workflow> folder:
+Move into the $<$**workflow**$>$ folder:
 `cd workflow`
 
-Edit the configuration file (specify yout OrthoDB species list, orthologous group selection parameters, RAxML parameters):
-config.yaml
+Edit the configuration file $<$**config.yaml**$>$ (specify yout OrthoDB species list, orthologous group selection parameters and RAxML parameters).
 
-Rune the pipeline, where <N> is the number of cores you want snakemake to use:
+Rune the pipeline, where $<$N$>$ is the number of cores you want snakemake to use:
 `snakemake --cores <N>`
 
 At the end of the computation, you will see a Snakemake error message but the RAxML results will still appear at the current location.
