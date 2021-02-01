@@ -1,9 +1,9 @@
-## Orthogeny
+# Orthogeny
 
 Snakemake pipeline to build phylogenetic trees from ***[OrthoDB](https://www.orthodb.org/)*** universal single-copy orthologues. 
 
 
-# Usage
+## Usage
 
 Install conda or miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/).
 
