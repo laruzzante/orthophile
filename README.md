@@ -25,6 +25,6 @@ Edit the configuration file (specify yout OrthoDB species list, orthologous grou
 config.yaml
 
 Rune the pipeline, where <N> is the number of cores you want snakemake to use:
-'snakemake --cores <N>'
+`snakemake --cores <N>`
 
 At the end of the computation, you will see a Snakemake error message but the RAxML results will still appear at the current location.
