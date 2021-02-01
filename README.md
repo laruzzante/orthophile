@@ -1,6 +1,6 @@
 # Orthogeny
 
-Snakemake pipeline to build a tree from OrthoDB single-copy orthologues. 
+Snakemake pipeline to build a phhylogenetic tree from OrthoDB universal single-copy orthologues. 
 
 
 # Usage
