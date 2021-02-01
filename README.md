@@ -7,7 +7,7 @@ Snakemake pipeline to build a tree from OrthoDB single-copy orthologues.
 
 Install conda or miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/).
 
-Download the git repository.
+Download the orthogeny git repository.
 
 Open a terminal and move into the <orthogeny> folder:
 `cd <your/path/to/orthogeny>`
