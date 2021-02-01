@@ -1,4 +1,4 @@
-# Orthogeny
+# Orthophile
 
 Snakemake pipeline to build phylogenetic trees from ***[OrthoDB](https://www.orthodb.org/)*** universal single-copy orthologues. 
 
@@ -7,9 +7,9 @@ Snakemake pipeline to build phylogenetic trees from ***[OrthoDB](https://www.ort
 
 Install conda or miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/).
 
-Download the orthogeny git repository.
+Download the orthophile git repository.
 
-Open a terminal and move into the **orthogeny** folder:
+Open a terminal and move into the **orthophile** folder:
 `cd <your/path/to/orthogeny>`
 
 Create the specific conda environment:
