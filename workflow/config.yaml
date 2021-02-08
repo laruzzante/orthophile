@@ -6,6 +6,7 @@ request_limit: '5000' ## A limit for getting results from the queries we will be
 universality: '0.95' ## The percentage of species required to have this gene in order for the query to return a result
 singlecopyness: '0.95' ## The percentage of number of species that have this gene as a single copy
 
+# Specify species python dictionary with OrthoDB identifiers as keys and prefered output species names (can be anything) as values.
 species_list : {
   '7217_0': 'Drosophila_ananassae',
   '125945_0': 'Drosophila_biarmipes',
@@ -30,7 +31,7 @@ species_list : {
   '7370_0': 'Musca_domestica'
 }
 
-outgroup: 'Musca_domestica'
+outgroup: 'Musca_domestica' # Multiple species can be specified as outgroup with the following syntax, e.g.: SpeciesA,SpeciesB
 raxml_output_name: 'drosophila'
 raxml_cores: '8'
 bootstraps: '100'
