@@ -28,5 +28,5 @@ Rune the pipeline, where **N** is the number of cores you want snakemake to use:
 
 At the end of the computation, you will see a Snakemake error message but the RAxML results will still appear at the current location.
 
-Once you are done with Orthophile, you can deactivate the conda environement by either closing the terminal or by executing:
+Once you are done with Orthophile, you can deactivate the conda environment by either closing the terminal or by executing:
 `conda deactivate`
