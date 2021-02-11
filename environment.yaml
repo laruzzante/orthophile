@@ -1,4 +1,4 @@
-name: orthogeny
+name: orthophile
 channels:
   - conda-forge
   - bioconda
