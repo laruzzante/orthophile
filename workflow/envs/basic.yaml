@@ -1,0 +1,6 @@
+name: orthophile
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7.3
+  - snakemake=5.26.1

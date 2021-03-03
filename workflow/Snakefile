@@ -15,6 +15,8 @@ rule all:
 rule fetch_sequences:
     output:
         sequences = 'output/odb_sequences.fasta'
+    conda:
+        'envs/basic.yaml'
     script:
         'scripts/fetch_odb_sequences.py'
 
@@ -23,6 +25,8 @@ rule align_trim_concatenate:
         sequences = rules.fetch_sequences.output.sequences
     output:
         msa = 'output/align_trim_conc_sequences.fasta'
+    conda:
+        'envs/basic.yaml'
     script:
         'scripts/align_trim_concatenate.py'
 
@@ -35,6 +39,8 @@ rule build_tree:
         BranchLabels = f"{ RAXML_OUTPUT_FOLDER }/RAxML_bipartitionsBranchLabels.{ config['raxml_output_name'] }",
         bootstrap = f"{ RAXML_OUTPUT_FOLDER }/RAxML_bootstrap.{ config['raxml_output_name'] }",
         info = f"{ RAXML_OUTPUT_FOLDER }/RAxML_info.{ config['raxml_output_name'] }"
+    conda:
+        'envs/tree_building.yaml'
     log:
         'RAxML_log.txt'
     shell:
