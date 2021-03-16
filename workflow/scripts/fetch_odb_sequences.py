@@ -25,10 +25,14 @@ print('\nuniversalPercentage: ' + universalPercentage)
 print('singleCopyPercentage: ' + singleCopyPercentage + '\n')
 
 query = 'search?limit='+limit+'&level='+taxonomicLevel+'&universal='+universalPercentage+'&singlecopy='+singleCopyPercentage ## Our query
-
+print('Query: ' +host+query+'\n')
 response = requests.get(host+query) ## Gets a response from the querying the url (host + query)
+print('Response code: '+str(response.status_code)+'\n')
+
 while response.status_code == 504: ## 504 Gateway Timeout error is an HTTP status code that means that one server did not receive a timely response from another server. So we try again until the query works.
     response = requests.get(host+query)
+    time.sleep(2.5)
+    print('Response code: '+str(response.status_code)+'\n')
 if response.status_code != 200: ## Any other response code than 200 is an error
     print('Bad query: '+host+query+'\n')
     print('Response code: '+str(response.status_code)+'\n')

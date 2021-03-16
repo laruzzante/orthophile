@@ -1,43 +1,51 @@
 # OrthoDB parameters
 host: 'http://www.orthodb.org/' ## Orthodb website that we will be using for querying
-taxonomic_level: '7147' ## taxonomic identifier (NCBI) indicating the OrthoDB mapping node, e.g. ID 7147 for node Diptera
+taxonomic_level: '6656' ## taxonomic identifier (NCBI) indicating the OrthoDB mapping node, e.g. ID 7147 for node Diptera
 request_limit: '5000' ## The maximum number of orthologous sequences to pull from OrthoDB
-universality: '0.95' ## The percentage of species required to have this gene in order for the query to return a result
-singlecopyness: '0.95' ## The percentage of number of species that have this gene as a single copy
+universality: '0.90' ## The percentage of species required to have this gene in order for the query to return a result
+singlecopyness: '0.90' ## The percentage of number of species that have this gene as a single copy
 
 # Species
 ## configure the species python dictionary with < OrthoDB species identifiers > as keys and < prefered output species names > (can be anything) as values, e.g.:
 ## 'NCBItaxid_0': 'SpeciesName'
-species_list : {
-  '7217_0': 'Drosophila_ananassae',
-  '125945_0': 'Drosophila_biarmipes',
-  '42026_0': 'Drosophila_bipectinata',
-  '30019_0': 'Drosophila_busckii',
-  '30023_0': 'Drosophila_elegans',
-  '7220_0': 'Drosophila_erecta',
-  '29029_0': 'Drosophila_eugracilis',
-  '30025_0': 'Drosophila_ficusphila',
-  '7222_0': 'Drosophila_grimshawi',
-  '7224_0': 'Drosophila_hydei',
-  '7227_0': 'Drosophila_melanogaster',
-  '7230_0': 'Drosophila_mojavensis',
-  '7282_0': 'Drosophila_obscura',
-  '7237_0': 'Drosophila_pseudoobscura',
-  '1041015_0': 'Drosophila_rhopaloa',
-  '7274_0': 'Drosophila_serrata',
-  '29030_0': 'Drosophila_takahashii',
-  '7244_0': 'Drosophila_virilis',
-  '7260_0': 'Drosophila_willistoni',
-  '7245_0': 'Drosophila_yakuba',
-  '7370_0': 'Musca_domestica'
+species_list: {
+ '7222_0': 'Drosophila_grimshawi',
+ '7227_0': 'Drosophila_melanogaster',
+ '6850_0': 'Limulus_polyphemus',
+ '126957_0': 'Strigamia_maritima',
+ '6669_0': 'Daphnia_pulex',
+ '218467_0': 'Centruroides_sculpturatus',
+ '114398_0': 'Parasteatoda_tepidariorum',
+ '6945_0': 'Ixodes_scapularis',
+ '48709_0': 'Orchesella_cincta',
+ '6973_0' : 'Blattella_germanica',
+ '121225_0': 'Pediculus_humans',
+ '52612_0': 'Calopteryx_splendends',
+ '13164_0': 'Myzus_persicae',
+ '7536_0': 'Oncopeltus fasciatus',
+ '1218281_0': 'Limnephilus_lunatus',
+ '211228_0': 'Cephus_cinctus',
+ '37344_0': 'Athalia_rosae',
+ '91411_0': 'Polistes_canadensis',
+ '7460_0': 'Apis_mellifera',
+ '67767_0': 'Lasius_niger',
+ '7091_0': 'Bombyx_mori',
+ '13037_0': 'Danaus_plexippus',
+ '7070_0': 'Tribolium_castaneum',
+ '7165_0': 'Anopheles_gambiae',
+ '7159_0': 'Aedes aegypti',
+ '7200_0': 'Lutzomyia_longipalpis',
+ '7370_0': 'Musca_domestica',
+ '7394_0': 'Glossina_morsitans'
 }
 
 # RAxML paramters
-outgroup: 'Musca_domestica' # Multiple species can be specified as outgroup with the following syntax, e.g.: SpeciesA,SpeciesB
-raxml_output_name: 'drosophila'
+outgroup: 'Limulus_polyphemus,Strigamia_maritima' # Multiple species can be specified as outgroup with the following syntax, e.g.: SpeciesA,SpeciesB
+raxml_output_name: 'arthropod_orders'
 raxml_cores: '8'
 bootstraps: '100'
 model: 'PROTGAMMAJTT'
 algorithm: 'a'
 rapid_bootstrap_seed: '1234'
 parsimony_seed: '1234'
+
