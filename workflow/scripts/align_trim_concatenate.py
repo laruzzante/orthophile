@@ -10,7 +10,7 @@ print('START: '+str(datetime.now())+'\n') ## Starting time of the analysis
 
 infile = open(snakemake.input["sequences"])
 
-relative_path = ''
+relative_path = 'output/'
 
 ## Create a clean directory to store the orthology groups
 if not os.path.exists(relative_path + 'orthoGroups/'):
