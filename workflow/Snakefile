@@ -1,10 +1,6 @@
 configfile: 'config.yaml'
 
-include: 'rules/utils.smk'
 include: 'rules/build_phylogeny.smk'
-
-input_species = get_input_species()
-
 
 
 rule all:

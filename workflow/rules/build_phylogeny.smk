@@ -2,13 +2,18 @@ import os
 PATH = os.path.abspath('.')
 RAXML_OUTPUT_FOLDER = f"{ PATH }/output/{ config['raxml_output_name'] }_RAxML"
 
+include: 'utils.smk'
+input_species = get_input_species()
+
 rule fetch_sequences:
     output:
         sequences = 'output/odb_sequences.fasta'
+    params:
+        species = input_species
     conda:
         '../envs/basic.yaml'
     script:
-        'scripts/fetch_odb_sequences.py'
+        '../scripts/fetch_odb_sequences.py'
 
 rule align_trim_concatenate:
     input:
@@ -18,7 +23,7 @@ rule align_trim_concatenate:
     conda:
         '../envs/tree_building.yaml'
     script:
-        'scripts/align_trim_concatenate.py'
+        '../scripts/align_trim_concatenate.py'
 
 rule build_tree:
     input:
