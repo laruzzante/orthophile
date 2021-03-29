@@ -12,6 +12,8 @@ rule fetch_sequences:
         all_species = input_species
     conda:
         '../envs/basic.yaml'
+    log:
+        'log/fetch_OrthoDB_sequences.log'
     script:
         '../scripts/fetch_odb_sequences.py'
 
@@ -33,7 +35,7 @@ rule align:
     conda:
         '../envs/tree_building.yaml'
     log:
-        'log/align_{orthogroup}.log'
+        'log/alignments/align_{orthogroup}.log'
     shell:
         'muscle -in {input} -out {output} -quiet'
 
@@ -45,7 +47,7 @@ rule trim:
     conda:
         '../envs/tree_building.yaml'
     log:
-        'log/trim_{orthogroup}.log'
+        'log/trims/trim_{orthogroup}.log'
     shell:
         'trimal -in {input} -out {output} -strictplus'
 
