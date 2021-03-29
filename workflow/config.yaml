@@ -13,7 +13,7 @@ input_species: input/170_arthropods.txt
 # RAxML paramters
 outgroup: 'Strigamia_maritima' # Multiple species can be specified as outgroup with the following syntax, e.g.: SpeciesA,SpeciesB
 raxml_output_name: 'arthropod_orders'
-raxml_cores: '4'
+raxml_cores: '8'
 bootstraps: '100'
 model: 'PROTGAMMAJTT'
 algorithm: 'a'
