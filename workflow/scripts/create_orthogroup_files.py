@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-import sys
-from datetime import datetime
 import os
-import shutil
-
-print('START: '+str(datetime.now())+'\n') ## Starting time of the analysis
 
 infile = open(snakemake.input["sequences"])
 outdir = snakemake.output[0]

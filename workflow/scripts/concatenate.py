@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-import sys
-from datetime import datetime
 from collections import defaultdict
-import subprocess
-import os
-import shutil
 
 input = snakemake.input
 all_species = snakemake.params.all_species

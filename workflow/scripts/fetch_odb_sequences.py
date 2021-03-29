@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 ## Loading the required packages
-import sys
 from collections import defaultdict
 from datetime import datetime
 import json
