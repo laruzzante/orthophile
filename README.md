@@ -15,12 +15,14 @@ Open a terminal and move into the **orthophile** folder:
 Move into the **workflow** folder:
 `cd workflow`
 
-Edit the configuration file **config.yaml** (specify yout OrthoDB species list, orthologous group selection parameters and RAxML parameters).
+Prepare an input file containing the list of species that you would like to include in the phylogeny, using this format (one species per row):
+`species_name,NCBI_taxonomy_ID`
+where 'species_name' can be any name you want to associate to that species, followed by a comma and its corresponding NCBI Taxonomy identifier.
+
+Edit the configuration file **config.yaml** (specify your orthologous group selection parameters and RAxML parameters).
 
 Rune the pipeline, where **N** is the number of cores you want snakemake to use:
 `snakemake --cores <N> --use-conda`
 
-At the end of the computation, you will see a Snakemake error message but the RAxML results will still appear at the current location.
+The RAxML results will be stored in a specific folder in the output.
 
-Once you are done with Orthophile, you can deactivate the conda environment by either closing the terminal or by executing:
-`conda deactivate`
