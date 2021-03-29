@@ -25,7 +25,7 @@ for fin in input:
             seq_length += len(sequence_part)
     for species_id,species in all_species.items():
         if species not in orthogroup_species_list:
-            print(f'\n{speceis} missing from the alignment file {fin}, adding gap sequence of same length.')
+            print(f'\n{species} missing from the alignment file {fin}, adding gap sequence of same length.')
             if species not in concatenatedAlignmentDictionary.keys():
                 concatenatedAlignmentDictionary[species] = '-'*seq_length+'\n'
             else:
