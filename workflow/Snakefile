@@ -5,7 +5,11 @@ include: 'rules/build_phylogeny.smk'
 
 rule all:
     input:
+        # rules.create_orthogroup_files.output
+        # rules.concatenate.output.msa
         rules.build_tree.output
+
+
         # bestTree = f"{ RAXML_OUTPUT_FOLDER }/RAxML_bestTree.{ config['raxml_output_name'] }",
         # bipartitions = f"{ RAXML_OUTPUT_FOLDER }/RAxML_bipartitions.{ config['raxml_output_name'] }",
         # BranchLabels = f"{ RAXML_OUTPUT_FOLDER }/RAxML_bipartitionsBranchLabels.{ config['raxml_output_name'] }",

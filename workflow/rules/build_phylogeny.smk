@@ -9,25 +9,66 @@ rule fetch_sequences:
     output:
         sequences = 'output/odb_sequences.fasta'
     params:
-        species = input_species
+        all_species = input_species
     conda:
         '../envs/basic.yaml'
     script:
         '../scripts/fetch_odb_sequences.py'
 
-rule align_trim_concatenate:
+checkpoint create_orthogroup_files:
     input:
         sequences = rules.fetch_sequences.output.sequences
     output:
-        msa = 'output/multiple_sequence_alignment.fasta'
+        orthoGroups = directory('output/orthogroups/')
+    conda:
+        '../envs/basic.yaml'
+    script:
+        '../scripts/create_orthogroup_files.py'
+
+rule align:
+    input:
+        'output/orthogroups/{orthogroup}.fas'
+    output:
+        'output/alignments/{orthogroup}.aln'
+    conda:
+        '../envs/tree_building.yaml'
+    log:
+        'log/align_{orthogroup}.log'
+    shell:
+        'muscle -in {input} -out {output} -quiet'
+
+rule trim:
+    input:
+        'output/alignments/{orthogroup}.aln'
+    output:
+        'output/alignments/{orthogroup}.aln.trm'
+    conda:
+        '../envs/tree_building.yaml'
+    log:
+        'log/trim_{orthogroup}.log'
+    shell:
+        'trimal -in {input} -out {output} -strictplus'
+
+def get_orthogroups(wildcards):
+    orthogroups_dir = checkpoints.create_orthogroup_files.get(**wildcards).output[0] # get() here forces the checkpoint to rerun the DAG. E.g. without get(), I would only get a string of the output name.
+    input = expand(rules.trim.output,orthogroup=glob_wildcards(os.path.join(orthogroups_dir, '{orthogroup}.fas')).orthogroup)
+    return input
+
+rule concatenate:
+    input:
+        get_orthogroups
+    output:
+        msa = 'output/multiple_sequence_alignment.fas'
+    params:
+        all_species = input_species
     conda:
         '../envs/tree_building.yaml'
     script:
-        '../scripts/align_trim_concatenate.py'
+        '../scripts/concatenate.py'
 
 rule build_tree:
     input:
-        rules.align_trim_concatenate.output.msa
+        rules.concatenate.output.msa
     output:
         bestTree = f"{ RAXML_OUTPUT_FOLDER }/RAxML_bestTree.{ config['raxml_output_name'] }",
         bipartitions = f"{ RAXML_OUTPUT_FOLDER }/RAxML_bipartitions.{ config['raxml_output_name'] }",
@@ -37,7 +78,7 @@ rule build_tree:
     conda:
         '../envs/tree_building.yaml'
     log:
-        'log/RAxML_log.txt'
+        'log/RAxML.log'
     shell:
         "raxmlHPC-PTHREADS -T {config[raxml_cores]} -s {input} -n {config[raxml_output_name]} \
         -o {config[outgroup]} -N {config[bootstraps]} -m {config[model]} -f {config[algorithm]} \

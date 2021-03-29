@@ -13,7 +13,7 @@ host = snakemake.config["host"] ## Orthodb website that we will be using for que
 taxonomicLevel = snakemake.config["taxonomic_level"] ## taxonomic identifier (NCBI), e.g. ID for node Hymenoptera
 
 ## Dictionary of all species, pairing numerical identifiers to a human readable identifier
-speciesDict = snakemake.params.species
+speciesDict = snakemake.params.all_species
 
 numberOfSpecies = len(speciesDict) ## The number of species we are looking at
 
@@ -22,7 +22,8 @@ universalPercentage = snakemake.config["universality"] ## The percentage of spec
 singleCopyPercentage = snakemake.config["singlecopyness"] ## The percentage of number of species that have this gene as a single opy
 
 print('\nuniversalPercentage: ' + universalPercentage)
-print('singleCopyPercentage: ' + singleCopyPercentage + '\n')
+print('singleCopyPercentage: ' + singleCopyPercentage)
+print('maximun number of requested orthogroups: ' + limit + '\n')
 
 query = 'search?limit='+limit+'&level='+taxonomicLevel+'&universal='+universalPercentage+'&singlecopy='+singleCopyPercentage ## Our query
 print('Your query: ' +host+query+'\n')
@@ -53,6 +54,7 @@ processedGroupCount = 0
 usedGroupCount = 0
 present_in_all_count = 0
 single_copy_count = 0
+universal_singlecopy_count = 0
 
 for orthoGroup in orthoGroups: ## Query over each orthologous group
     speciesCopyDict = defaultdict(list) ## A dictionary where we will store all genes of the orthologous group belonging to a species
@@ -73,25 +75,26 @@ for orthoGroup in orthoGroups: ## Query over each orthologous group
             elif not line.strip() == '': ## Anything that doesn't start with '>' is the protein sequence
                 sequence = line.strip() ## To remove the line break at the end of the line
                 speciesCopyDict[speciesName].append(speciesName+'|'+orthoGroup+'|'+geneIdentifier+'\n'+sequence) ## Each fasta file is stored in the species copy dict, for each species, in list format
-    isUniversal = True ## A boolean value to check if we want to write the sequences for this group to our outfile
-    isSingleCopy = True
 
-    ## Code block that selects only single-copy orthogroups and present-in-all species. Against the purpose of user selection of query paramters.
-    if not len(speciesCopyDict.keys()) == numberOfSpecies: ## If the amount of species for which we have an orthologous gene doesnt match all the species we are looking for, change the useGroup boolean to False because the orthologous group is not universal
+    if len(speciesCopyDict.keys()) == numberOfSpecies: ## If the amount of species for which we have an orthologous gene doesnt match all the species we are looking for, change the useGroup boolean to False because the orthologous group is not universal
+        present_in_all_count += 1
+        isUniversal = True
+    else:
         isUniversal = False
-    # else: ## If the orthologous group is not single copy in every species, change the useGroup to false
+
+    isSingleCopy = True
     for species,genes in speciesCopyDict.items():
         if not len(genes) == 1:
+            ## If the orthologous group is not single copy in every species, change the isSingleCopy to false
             isSingleCopy = False
 
-    if isUniversal == True and isSingleCopy == True: ## If the useGroup is still True, write the sequences to our outfile
+    if isSingleCopy == True: ## If the useGroup is still True, write the sequences to our outfile
         for species,genes in speciesCopyDict.items():
             for gene in genes:
                 outfile.write('>'+gene+'\n')
         usedGroupCount += 1
-        present_in_all_count += 1
         single_copy_count += 1
-    elif isUniversal == True and isSingleCopy == False:
+    else:
         for species,genes in speciesCopyDict.items():
             gene_lengths = {}
             for gene in genes:
@@ -102,38 +105,16 @@ for orthoGroup in orthoGroups: ## Query over each orthologous group
             max_length = max(gene_lengths.keys())
             outfile.write('>'+gene_lengths[max_length]+'\n')
         usedGroupCount += 1
-        present_in_all_count += 1
-    elif isUniversal == False and isSingleCopy == True:
-        for species,genes in speciesCopyDict.items():
-            for gene in genes:
-                outfile.write('>'+gene+'\n')
-        last_gene = gene.split('\n')[1]
-        gene_length = len(last_gene)
-        for species in speciesDict.keys():
-            if species not in speciesCopyDict.keys():
-                outfile.write('>'+species+'|'+orthoGroup+'|'+'gap'+'\n'+'-'*gene_length+'\n')
-        usedGroupCount += 1
-        single_copy_count += 1
-    elif isUniversal == False and isSingleCopy == False:
-        for species,genes in speciesCopyDict.items():
-            gene_lengths = {}
-            for gene in genes:
-                gene_id = gene.split('|')[2]
-                gene_seq = gene.split('\n')[1]
-                gene_length = len(gene_seq)
-                gene_lengths[gene_length] = gene
-            max_length = max(gene_lengths.keys())
-            outfile.write('>'+gene_lengths[max_length]+'\n')
-        for species in speciesDict.keys():
-            if species not in speciesCopyDict.keys():
-                outfile.write('>'+species+'|'+orthoGroup+'|'+'gap'+'\n'+'-'*max_length+'\n')
-        usedGroupCount += 1
+
+    if isSingleCopy == True and isUniversal == True:
+        universal_singlecopy_count += 1
 
     processedGroupCount += 1
     if processedGroupCount % 10 == 0: ## Progress printout to terminal
         print(str(processedGroupCount)+' orthologous groups processed... '+str(datetime.now()))
 
 outfile.close()
-print('Processed '+str(usedGroupCount)+' orthologous groups across '+str(numberOfSpecies)+' species\n')
-print('Of which: ' + str(single_copy_count) ' single-copy and ' + str(present_in_all_count) + 'present in all species.')
+print(f'Processed {usedGroupCount} orthologous groups across {numberOfSpecies} species.\n')
+print(f'Of which: {single_copy_count} single-copy, {present_in_all_count} present in all species,\
+ and {universal_singlecopy_count} single-copy and present in all species.\n')
 print('END: '+str(datetime.now()))
