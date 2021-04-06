@@ -4,6 +4,7 @@ channels:
   - bioconda
 dependencies:
   - python=3.7.3
-  - trimal=1.4.1
   - muscle=3.8.1551
+  - trimal=1.4.1
+  - fasttree=2.1.10
   - raxml=8.2.12

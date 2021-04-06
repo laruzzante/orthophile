@@ -68,7 +68,17 @@ rule concatenate:
     script:
         '../scripts/concatenate.py'
 
-rule build_tree:
+rule fasttree:
+    input:
+        rules.concatenate.output.msa
+    output:
+        'output/FastTree.tree'
+    log:
+        'log/FastTree.log'
+    shell:
+        'FastTree {input} > {output}'
+
+rule raxml:
     input:
         rules.concatenate.output.msa
     output:
