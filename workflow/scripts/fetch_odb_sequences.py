@@ -73,6 +73,7 @@ for orthoGroup in orthoGroups: ## Query over each orthologous group
                 geneIdentifier = line.split('"pub_gene_id":"')[1].split('"')[0] ## We isolate the gene identifier
             elif not line.strip() == '': ## Anything that doesn't start with '>' is the protein sequence
                 sequence = line.strip() ## To remove the line break at the end of the line
+                sequence = sequence.replace('*','X') ## Some genes from OrthoDB have '*' inside the translated sequence, hence we replace them with unknown AA symbol, which is 'X'.
                 speciesCopyDict[speciesName].append(speciesName+'|'+orthoGroup+'|'+geneIdentifier+'\n'+sequence) ## Each fasta file is stored in the species copy dict, for each species, in list format
 
     if len(speciesCopyDict.keys()) == numberOfSpecies: ## If the amount of species for which we have an orthologous gene doesnt match all the species we are looking for, change the useGroup boolean to False because the orthologous group is not universal
