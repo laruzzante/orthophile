@@ -76,7 +76,7 @@ rule fasttree:
     log:
         'log/FastTree.log'
     shell:
-        'FastTree {input} > {output}'
+        'FastTree -pseudo -gamma -spr 4 -mlacc 2 -slownni < {input} > {output}'
 
 rule raxml:
     input:
