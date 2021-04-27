@@ -7,7 +7,9 @@ outdir = snakemake.output[0]
 if not os.path.isdir(outdir):
     os.mkdir(outdir)
 
-for line in infile.readlines(): ## Iterate over the input file
+lines = infile.readlines()
+
+for line in lines: ## Iterate over the input file
 	if line.startswith('>'): ## Take the species and orthology group from the header line, create new header line with just the species name
 		ssline = line.strip().split('|')
 		species = ssline[0]

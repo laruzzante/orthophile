@@ -37,7 +37,7 @@ rule align:
     log:
         'log/alignments/align_{orthogroup}.log'
     shell:
-        'muscle -in {input} -out {output} -quiet'
+        'muscle -in {input} -out {output} -seqtype protein -quiet'
 
 rule trim:
     input:
