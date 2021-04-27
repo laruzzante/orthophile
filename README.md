@@ -10,7 +10,7 @@ Install conda or miniconda (https://docs.conda.io/projects/conda/en/latest/user-
 Download the orthophile git repository.
 
 Open a terminal and move into the **orthophile** folder:
-`cd <your/path/to/orthogeny>`
+`cd <your/path/to/orthophile>`
 
 Move into the **workflow** folder:
 `cd workflow`
