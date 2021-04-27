@@ -1,6 +1,6 @@
 # Orthophile
 
-Snakemake pipeline to build phylogenetic trees from ***[OrthoDB](https://www.orthodb.org/)*** universal single-copy orthologues.
+Snakemake pipeline to build phylogenetic trees with thousand of orthologues genes from ***[OrthoDB](https://www.orthodb.org/)***.
 
 
 ## Usage
