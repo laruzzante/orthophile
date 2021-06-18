@@ -1,6 +1,6 @@
 # OrthoDB parameters
 host: 'http://www.orthodb.org/' ## Orthodb website that we will be using for querying
-taxonomic_level: '7147' ## taxonomic identifier (NCBI) indicating the OrthoDB mapping node, e.g. ID 7147 for node Diptera
+taxonomic_level: '7214' ## taxonomic identifier (NCBI) indicating the OrthoDB mapping node, e.g. ID 7147 for node Diptera
 request_limit: '10000' ## The maximum number of orthologous sequences to pull from OrthoDB
 universality: '1' ## The percentage of species required to have this gene in order for the query to return a result
 singlecopyness: '1' ## The percentage of number of species that have this gene as a single copy

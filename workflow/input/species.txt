@@ -18,4 +18,3 @@ Drosophila_takahashii,29030
 Drosophila_virilis,7244
 Drosophila_willistoni,7260
 Drosophila_yakuba,7245
-Musca_domestica,7370
