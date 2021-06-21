@@ -17,6 +17,12 @@ rule fetch_sequences:
     script:
         '../scripts/fetch_odb_sequences.py'
 
+'''
+CAREFUL: if you want to provide a sequence file at this point,
+make sure that each sequence is contained in one line, i.e. no
+new line characters allowed inside sequences.
+'''
+
 checkpoint create_orthogroup_files:
     input:
         sequences = rules.fetch_sequences.output.sequences
@@ -26,6 +32,18 @@ checkpoint create_orthogroup_files:
         '../envs/basic.yaml'
     script:
         '../scripts/create_orthogroup_files.py'
+
+# rule align:
+#     input:
+#         'output/orthogroups/{orthogroup}.fas'
+#     output:
+#         'output/alignments/{orthogroup}.aln'
+#     conda:
+#         '../envs/tree_building.yaml'
+#     log:
+#         'log/alignments/align_{orthogroup}.log'
+#     shell:
+#         'muscle -in {input} -out {output} -seqtype protein -quiet'
 
 rule align:
     input:
@@ -37,7 +55,7 @@ rule align:
     log:
         'log/alignments/align_{orthogroup}.log'
     shell:
-        'muscle -in {input} -out {output} -seqtype protein -quiet'
+        'mafft --auto --leavegappyregion --anysymbol {input} > {output}'
 
 rule trim:
     input:

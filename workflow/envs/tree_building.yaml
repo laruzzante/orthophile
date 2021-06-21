@@ -5,6 +5,7 @@ channels:
 dependencies:
   - python=3.7.3
   - muscle=3.8.1551
+  - mafft=7.480
   - trimal=1.4.1
   - fasttree=2.1.10
   - raxml=8.2.12
