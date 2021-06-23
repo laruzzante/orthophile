@@ -7,7 +7,7 @@ input_species = get_input_species()
 
 rule fetch_sequences:
     output:
-        sequences = 'output/odb_sequences.fasta'
+        sequences = 'output/odb_sequences.faa'
     params:
         all_species = input_species
     conda:
@@ -47,7 +47,7 @@ checkpoint create_orthogroup_files:
 
 rule align:
     input:
-        'output/orthogroups/{orthogroup}.fas'
+        'output/orthogroups/{orthogroup}.faa'
     output:
         'output/alignments/{orthogroup}.aln'
     conda:
@@ -78,7 +78,7 @@ rule concatenate:
     input:
         get_orthogroups
     output:
-        msa = 'output/multiple_sequence_alignment.fas'
+        msa = 'output/multiple_sequence_alignment.faa'
     params:
         all_species = input_species
     conda:

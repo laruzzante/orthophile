@@ -23,7 +23,7 @@ for line in lines: ## Iterate over the input file
         header = species
     else: ## If line doesn't start with '>' its the sequence
         sequence = line
-        outfile = open(os.path.join(outdir,orthoGroup+'.fas'),'a') ## Write the fasta to the orthoGroup file
+        outfile = open(os.path.join(outdir,orthoGroup+'.faa'),'a') ## Write the fasta to the orthoGroup file
         outfile.write(header+'\n'+sequence) ## Header consists of species name only
         outfile.close()
 
