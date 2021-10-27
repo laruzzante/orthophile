@@ -17,11 +17,6 @@ rule fetch_sequences:
     script:
         '../scripts/fetch_odb_sequences.py'
 
-'''
-CAREFUL: if you want to provide a sequence file at this point,
-make sure that each sequence is contained in one line, i.e. no
-new line characters allowed inside sequences.
-'''
 
 checkpoint create_orthogroup_files:
     input:
@@ -33,21 +28,9 @@ checkpoint create_orthogroup_files:
     script:
         '../scripts/create_orthogroup_files.py'
 
-# rule align:
-#     input:
-#         'output/orthogroups/{orthogroup}.fas'
-#     output:
-#         'output/alignments/{orthogroup}.aln'
-#     conda:
-#         '../envs/tree_building.yaml'
-#     log:
-#         'log/alignments/align_{orthogroup}.log'
-#     shell:
-#         'muscle -in {input} -out {output} -seqtype protein -quiet'
-
 rule align:
     input:
-        'output/orthogroups/{orthogroup}.faa'
+        'output/orthogroups/{orthogroup}.fas'
     output:
         'output/alignments/{orthogroup}.aln'
     conda:
@@ -55,7 +38,19 @@ rule align:
     log:
         'log/alignments/align_{orthogroup}.log'
     shell:
-        'mafft --auto --leavegappyregion --anysymbol {input} > {output}'
+        'muscle -in {input} -out {output} -seqtype protein -quiet'
+
+# rule align:
+#     input:
+#         'output/orthogroups/{orthogroup}.faa'
+#     output:
+#         'output/alignments/{orthogroup}.aln'
+#     conda:
+#         '../envs/tree_building.yaml'
+#     log:
+#         'log/alignments/align_{orthogroup}.log'
+#     shell:
+#         'mafft --auto --leavegappyregion --anysymbol {input} > {output}'
 
 rule trim:
     input:

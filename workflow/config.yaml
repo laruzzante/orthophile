@@ -8,13 +8,7 @@ singlecopyness: '0.9' ## The percentage of number of species that have this gene
 # Species
 ## configure the input species file with one species per line:
 ## speciesName,NCBITaxID
-input_species: input/6656.txt
-
-'''
-CAREFUL: if you want to provide a sequence file at this point,
-make sure that each sequence is contained in one line, i.e. no
-new line characters allowed inside sequences.
-'''
+input_species: input/glossinainput.txt
 
 # RAxML paramters
 outgroup: 'Strigamia_maritima' # Multiple species can be specified as outgroup with the following syntax, e.g.: SpeciesA,SpeciesB
