@@ -16,8 +16,8 @@ Move into the **workflow** folder:
 `cd workflow`
 
 Prepare an input file containing the list of species that you would like to include in the phylogeny, using this format (one species per row):
-`species_name,NCBI_taxonomy_ID`
-where 'species_name' can be any name you want to associate to that species, followed by a comma and its corresponding NCBI Taxonomy identifier.
+`NCBI_taxonomy_ID, species_name`
+where 'species_name' can be any name you want to associate to that species, followed by a comma and its corresponding NCBI Taxonomy identifier. Any white spaces in the species names should be replaced by underscores ('_').
 
 Edit the configuration file **config.yaml** (specify your orthologous group selection parameters and RAxML parameters).
 
@@ -25,4 +25,3 @@ Rune the pipeline, where **N** is the number of cores you want snakemake to use:
 `snakemake --cores <N> --use-conda`
 
 The RAxML results will be stored in a specific folder in the output.
-

@@ -1,18 +1,18 @@
 # OrthoDB parameters
-host: 'http://www.orthodb.org/' ## Orthodb website that we will be using for querying
-taxonomic_level: '6656' ## taxonomic identifier (NCBI) indicating the OrthoDB mapping node, e.g. ID 7147 for node Diptera
+host: 'https://data.orthodb.org/current/' ## Orthodb website that we will be using for querying
+taxonomic_level: '34735' ## taxonomic identifier (NCBI) indicating the OrthoDB mapping node, e.g. ID 7147 for node Diptera
 request_limit: '5000' ## The maximum number of orthologous sequences to pull from OrthoDB
-universality: '0.9' ## The percentage of species required to have this gene in order for the query to return a result
-singlecopyness: '0.9' ## The percentage of number of species that have this gene as a single copy
+universality: '1' ## The percentage of species required to have this gene in order for the query to return a result
+singlecopyness: '1' ## The percentage of number of species that have this gene as a single copy
 
 # Species
 ## configure the input species file with one species per line:
 ## speciesName,NCBITaxID
-input_species: input/170_arthropods.txt
+input_species: input/25_apoidea.txt
 
 # RAxML paramters
-outgroup: 'Strigamia_maritima' # Multiple species can be specified as outgroup with the following syntax, e.g.: SpeciesA,SpeciesB
-raxml_output_name: 'arthropod_orders'
+outgroup: '2448451_0' # Multiple species can be specified as outgroup with the following syntax, e.g.: SpeciesA,SpeciesB
+raxml_output_name: 'apoidea'
 raxml_cores: '8'
 bootstraps: '100'
 model: 'PROTGAMMAJTT'

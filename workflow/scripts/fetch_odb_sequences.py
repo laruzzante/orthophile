@@ -24,7 +24,7 @@ print('\nuniversalPercentage: ' + universalPercentage)
 print('singleCopyPercentage: ' + singleCopyPercentage)
 print('maximun number of requested orthogroups: ' + limit + '\n')
 
-query = 'search?limit='+limit+'&level='+taxonomicLevel+'&universal='+universalPercentage+'&singlecopy='+singleCopyPercentage ## Our query
+query = 'search?take='+limit+'&level='+taxonomicLevel+'&universal='+universalPercentage+'&singlecopy='+singleCopyPercentage ## Our query
 print('Your query: ' +host+query+'\n')
 response = requests.get(host+query) ## Gets a response from the querying the url (host + query)
 print('Response code: '+str(response.status_code)+'\n')
